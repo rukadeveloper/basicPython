@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Awesome Memo!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul,
+      ol,
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      body {
+        background-color: #499cc1;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .todo {
+        width: 400px;
+        height: 600px;
+        background-color: white;
+      }
+
+      .todo h2 {
+        text-align: center;
+      }
+
+      .todo .inputs {
+        padding: 0 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .todo .inputs input {
+        width: 200px;
+        height: 15px;
+        padding: 15px 0;
+        text-align: center;
+        font-size: 14px;
+        outline: none;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .todo .inputs button {
+        flex: 1;
+        border: none;
+        border-radius: 5px;
+        background-color: #499cc1;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .todo .inputs button:first-of-type {
+        margin-right: 10px;
+        opacity: 0.4;
+      }
+
+      .todo .inputs button:last-of-type {
+        color: #fff;
+      }
+
+      .todo .inputs button.opa {
+        opacity: 1;
+      }
+
+      .todo .inputs button img {
+        width: 25px;
+      }
+
+      .todo ul {
+        margin-top: 10px;
+      }
+
+      .todo > ul > li {
+        margin: 0 15px;
+        padding: 10px;
+        background-color: #f9fdff;
+        border-top: 1px solid rgba(0, 0, 0, 0.25);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      .todo > ul > li div {
+        padding-top: 3px;
+        margin-left: 10px;
+        line-height: 1;
+        font-size: 14px;
+        color: #499cc1;
+      }
+
+      .todo > ul > li > ul.buttons {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .todo > ul > li > ul.buttons button {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .todo > ul > li > ul.buttons button img {
+        width: 15px;
+        opacity: 0.4;
+      }
+    </style>
+    <script src="./js/app.js"></script>
+  </head>
+  <body>
+    <div class="todo">
+      <h2>MEMO APP</h2>
+      <div class="inputs">
+        <input type="text" placeholder="내용을 입력해주세요." />
+        <button><img src="./assets/click.svg" alt="click" /></button>
+        <button>초기화</button>
+      </div>
+      <ul></ul>
+    </div>
+  </body>
+</html>
