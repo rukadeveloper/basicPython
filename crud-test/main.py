@@ -2,27 +2,37 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-app = FastAPI()
-
 class Memo(BaseModel):
-    id:int
-    content:str
+    id: int
+    content: str
 
 memos = []
+
+app = FastAPI()
 
 @app.post('/memos')
 def create_memo(memo:Memo):
     memos.append(memo)
-    return "성공"
-
-@app.post("/reset")
-def reset_memo():
-    global memos
-    memos = []
-    return "리셋완료"
+    return '메모 추가에 성공했다'
 
 @app.get('/memos')
 def read_memo():
     return memos
 
-app.mount("/",StaticFiles(directory="public",html=True), name="public")
+@app.put('/memos/{memo_id}')
+def put_memo(req_memo:Memo):
+    for memo in memos:
+        if(memo.id == req_memo.id):
+            memo.content = req_memo.content
+            return '200'
+    return '그런 요청은 없습니다.'
+
+@app.delete('/memos/{memo_id}')
+def delete_memo(memo_id: int):
+    for index,memo in enumerate(memos):
+        if memo_id == memo.id:
+            memos.pop(index)
+            return memos
+    return '그런 요청은 없습니다.'
+
+app.mount('/',StaticFiles(directory="public",html=True),name='public')

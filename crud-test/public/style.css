@@ -1,0 +1,210 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+body.dimmed:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.todos {
+  width: 60%;
+  height: 100vh;
+  background-color: #f7f7f7;
+  position: relative;
+}
+
+.todos > h2 {
+  text-align: center;
+}
+
+.todos .search_wrap .search {
+  width: 65%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.todos .search_wrap .search label {
+  display: none;
+}
+
+.todos .search_wrap .search button {
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.todos .search_wrap .search button img {
+  width: 20px;
+}
+
+.todos .search_wrap .search input {
+  width: 100%;
+  padding: 10px 8px;
+  border: 1px solid #6c63ff;
+  outline: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.todos .search_wrap .search input::placeholder {
+  color: #6c63ff;
+  opacity: 0.4;
+}
+
+.todos .plus {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #6c63ff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.todos .plus img {
+  width: 30px;
+}
+
+.todos .insert {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 400px;
+  height: 200px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.todos .insert.on {
+  display: block;
+}
+
+.todos .insert > h2 {
+  font-size: 18px;
+  text-align: center;
+}
+
+.todos .insert .insert_input label {
+  display: none;
+}
+
+.todos .insert .insert_input input {
+  width: 100%;
+  padding: 10px 8px;
+  border: 1px solid #6c63ff;
+  outline: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.todos .insert .insert_input input::placeholder {
+  font-size: 14px;
+  color: #6c63ff;
+  opacity: 0.4;
+}
+
+.todos .insert .buttons {
+  width: calc(100% - 40px);
+  position: absolute;
+  bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.todos .insert .buttons button {
+  background-color: #fff;
+  border: 1px solid #6c63ff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 17px;
+  color: #6c63ff;
+  cursor: pointer;
+}
+
+.todos .insert .buttons button:last-child {
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+.todos > ul {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.todos > ul > li {
+  padding: 10px 0;
+  border-bottom: 1px solid #6c63ff;
+}
+.todos > ul > li > span,
+.todos > ul > li > input[type="text"] {
+  margin-left: 15px;
+}
+
+.todos > ul > li > input[type="text"] {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.todos > ul > li > span.delete_select {
+  color: #ccc;
+  text-decoration: line-through;
+}
+
+.todos .abs-button {
+  position: absolute;
+  right: 100px;
+  top: 150px;
+}
+
+.todos .abs-button button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.todos .abs-button button img {
+  width: 15px;
+  opacity: 0.4;
+}
+
+.todos .abs-button button.active img {
+  opacity: 1;
+}
