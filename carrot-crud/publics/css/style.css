@@ -1,0 +1,24 @@
+@import "header.css";
+@import "main.css";
+@import "write.css";
+
+body {
+  font-family: "Noto Sans KR";
+}
+
+@media (min-width: 570px) {
+  main #media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: red;
+    z-index: 10;
+    font-size: 30px;
+    color: #fff;
+  }
+}

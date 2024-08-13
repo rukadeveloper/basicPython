@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>글쓰기 페이지</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div id="info-bar">
+        <div class="info-bar__time">20:55</div>
+        <div class="info-bar__icons">
+          <img src="./assets/chart.svg" alt="chart" />
+          <img src="./assets/wifi.svg" alt="wifi" />
+          <img src="./assets/battery.svg" alt="battery" />
+        </div>
+      </div>
+    </header>
+    <main>
+      <h2>내 물건 팔기</h2>
+      <form action="" id="write-form">
+        <div id="title">
+          <label for="title">글 제목</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            placeholder="제목을 입력해주세요."
+          />
+        </div>
+
+        <div id="description">
+          <label for="desc">상세 설명</label>
+          <input type="textarea" id="desc" name="description" />
+        </div>
+
+        <div id="price">
+          <label for="price">가격</label>
+          <input type="number" id="price" name="price" />
+        </div>
+
+        <div id="place">
+          <label for="place">장소</label>
+          <input type="text" id="place" name="place" />
+        </div>
+
+        <div id="image">
+          <h2>첨부파일</h2>
+          <div class="images">
+            <div>
+              <input type="file" name="image" />
+              <button><img src="./assets/photo.svg" alt="fileInput" /></button>
+            </div>
+          </div>
+        </div>
+
+        <div id="submit">
+          <button type="submit">제출하기</button>
+        </div>
+      </form>
+    </main>
+    <script src="./write.js"></script>
+  </body>
+</html>
