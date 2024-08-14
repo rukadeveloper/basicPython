@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <form action="/login" method="post" id="login-form">
+    <form action="/root/login" method="post" id="login-form">
       <img src="./assets/logo.png" alt="logo" />
       <div id="idval">
         <label for="idval">아이디 입력</label>
@@ -26,7 +26,7 @@
       <div id="pwval">
         <label for="pwval">패스워드 입력</label>
         <input
-          type="text"
+          type="password"
           id="pwval"
           name="pwval"
           placeholder="비밀번호 입력하기."
@@ -37,6 +37,7 @@
         <button type="submit">로그인</button>
       </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
     <script src="login.js"></script>
   </body>
 </html>

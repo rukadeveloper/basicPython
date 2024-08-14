@@ -1,7 +1,9 @@
-from fastapi import FastAPI,UploadFile,Form,File,Response
+from fastapi import FastAPI,UploadFile,Form,File,Response,Depends
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
+from fastapi_login import LoginManager
+from fastapi_login.exceptions import InvalidCredentialsException
 from typing import Annotated
 import sqlite3
 
@@ -21,6 +23,9 @@ cur.execute(f"""
             """)
 
 app = FastAPI()
+
+SECRET = "super-coding "
+manager = LoginManager(SECRET,"/login")
     
 
 @app.post("/items")
@@ -39,7 +44,7 @@ async def create_item(image:Annotated[UploadFile,File],title:Annotated[str,Form(
     return 'OK'
 
 @app.get("/items")
-async def get_item():
+async def get_item(user = Depends(manager)):
     con.row_factory = sqlite3.Row # 컬럼명 같이 가져오기
     cur = con.cursor()
     rows = cur.execute(f"""
@@ -73,5 +78,40 @@ def get_users():
                 """).fetchall()
     con.commit()
     return JSONResponse(jsonable_encoder(dict(data) for data in datas))
+
+@manager.user_loader()
+def query_user(data):
+    WHERE_STATEMENTS = f"""
+                        id="{data}"
+                        """
+    if type(data) == dict:
+        WHERE_STATEMENTS = f"""
+                            id="{data['id']}"
+                            """
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    user = cur.execute(f"""
+                        SELECT * FROM users WHERE {WHERE_STATEMENTS}
+                       """).fetchone()
+    con.commit()
+    return user
+
+@app.post("/root/login")
+def login(idval:Annotated[str,Form()],pwval:Annotated[str,Form()]):
+
+    user = query_user(idval)
+    if not user:
+        raise InvalidCredentialsException
+    elif pwval != user['password']:
+        raise InvalidCredentialsException
+    
+    access_token = manager.create_access_token(data={
+        'sub': {
+            'name': user['name'],
+            'id': user['id'],
+            'password': user['password']
+        }
+    })
+    return {'access_token' : access_token }
 
 app.mount("/root",StaticFiles(directory="publics",html = True),name="publics")
