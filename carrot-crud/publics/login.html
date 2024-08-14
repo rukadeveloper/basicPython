@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <form action="/login" method="post" id="login-form">
+      <img src="./assets/logo.png" alt="logo" />
+      <div id="idval">
+        <label for="idval">아이디 입력</label>
+        <input
+          type="text"
+          id="idval"
+          name="idval"
+          placeholder="아이디 혹은 이메일 입력하기."
+        />
+      </div>
+
+      <div id="pwval">
+        <label for="pwval">패스워드 입력</label>
+        <input
+          type="text"
+          id="pwval"
+          name="pwval"
+          placeholder="비밀번호 입력하기."
+        />
+      </div>
+
+      <div class="buttonval">
+        <button type="submit">로그인</button>
+      </div>
+    </form>
+    <script src="login.js"></script>
+  </body>
+</html>

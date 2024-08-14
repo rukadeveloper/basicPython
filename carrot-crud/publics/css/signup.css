@@ -1,0 +1,49 @@
+form {
+  width: 100%;
+  padding-top: 30px;
+}
+
+form img {
+  width: 80px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 50px;
+}
+
+form > div {
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+form > div > label,
+form > div > input {
+  display: block;
+}
+
+form > div > label {
+  margin-bottom: 10px;
+}
+
+form > div > input {
+  width: 100%;
+  padding: 15px 10px;
+  box-sizing: border-box;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+form > div.button {
+  width: 100%;
+}
+
+form > div.button button {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  border: none;
+  background-color: rgb(241, 138, 61);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}

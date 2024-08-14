@@ -53,7 +53,25 @@ async def get_image(item_id):
     image_bytes = cur.execute(f'''
                             SELECT image FROM items WHERE id = {item_id} 
                               ''').fetchone()[0]
-    return Response(content=bytes.fromhex(image_bytes))
+    return Response(content=bytes.fromhex(image_bytes), media_type='image/*')
 
+@app.post('/signup')
+def signup(uid:Annotated[str,Form()],upw:Annotated[str,Form()],name:Annotated[str,Form()]):
+    cur.execute(f"""
+                INSERT INTO users(id,name,password)
+                VALUES ('{uid}','{name}','{upw}');
+                """)
+    con.commit()
+    return '200'
+
+@app.get('/users')
+def get_users():
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    datas = cur.execute(f"""
+                  SELECT * FROM USERS
+                """).fetchall()
+    con.commit()
+    return JSONResponse(jsonable_encoder(dict(data) for data in datas))
 
 app.mount("/root",StaticFiles(directory="publics",html = True),name="publics")
