@@ -3,5 +3,5 @@
   import RealMain from "./RealMain.svelte";
 </script>
 
-<Header />
+<Header location="home" />
 <RealMain />

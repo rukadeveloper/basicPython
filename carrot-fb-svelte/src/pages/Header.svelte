@@ -1,6 +1,12 @@
 <script>
   let hour = new Date().getHours().toString().padStart(2, "0");
   let min = new Date().getMinutes().toString().padStart(2, "0");
+
+  export let location;
+
+  const goHome = () => {
+    window.location.hash = "/";
+  };
 </script>
 
 <header>
@@ -27,8 +33,12 @@
   </div>
   <div id="icons">
     <div class="icons__list">
-      <div>
-        <img src="./assets/homeActive.svg" alt="homeActive" />
+      <div on:click={goHome}>
+        {#if location === "home"}
+          <img src="./assets/homeActive.svg" alt="homeActive" />
+        {:else}
+          <img src="./assets/homeBasic.svg" alt="homeBasic" />
+        {/if}
         <span>홈</span>
       </div>
       <div>

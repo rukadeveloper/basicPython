@@ -1,18 +1,86 @@
+<script>
+  import { getDatabase, ref, onValue } from "firebase/database";
+  import { onMount } from "svelte";
+  import { link } from "svelte-spa-router";
+  import { user$ } from "../store";
+
+  let inner;
+
+  const db = getDatabase();
+  const itemsRef = ref(db, "items/");
+  const timestamp = (ts) => {
+    const ctime = new Date().getDate();
+    const dtime = new Date(ctime - ts);
+    const h = dtime.getHours();
+    const m = dtime.getMinutes();
+    const s = dtime.getSeconds();
+
+    if (h > 0) return `${h}시간 전`;
+    else if (m > 0) return `${m}분 전`;
+    else if (s > 0) return `${s}초 전`;
+    else return "방금 전";
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    $user$ = null;
+  };
+
+  $: items = [];
+
+  onMount(() => {
+    onValue(itemsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data && typeof data === "object")
+        items = Object.values(data).reverse();
+    });
+    if (items.length == 0) {
+      inner.classList.add("nodata");
+    }
+  });
+</script>
+
 <main>
   <div id="media">크기를 줄여주세요.</div>
-  <div class="main__inner">
-    <ul></ul>
+  <div class="main__inner" bind:this={inner}>
+    <ul>
+      {#if items.length !== 0}
+        {#each items as item}
+          <li>
+            <div class="lists__img">
+              <img src={item.imageUrl} alt="i" />
+            </div>
+            <div class="lists__info">
+              <div class="lists__info-title">{item.title}</div>
+              <div class="lists__info-location">
+                <span>{item.place}</span>
+                <span>{timestamp(item.timestamp)}</span>
+              </div>
+              <div class="lists__info-price">{item.price}</div>
+            </div>
+          </li>
+        {/each}
+      {:else}
+        <div class="nodata">No Product Founded</div>
+      {/if}
+    </ul>
     <div class="button_part">
-      <a href="write.html" class="write">
-        <span>글쓰기</span>
-        <img src="./assets/plus.svg" alt="plus" />
-      </a>
-      <a href="signup.html" class="signup">
-        <span>회원가입</span>
-      </a>
-      <a href="login.html" class="login">
-        <span>로그인</span>
-      </a>
+      {#if $user$}
+        <a href="/write" class="write" use:link>
+          <span>글쓰기</span>
+          <img src="./assets/plus.svg" alt="plus" />
+        </a>
+        <button on:click={logout}>
+          <span>로그아웃</span>
+        </button>
+      {:else}
+        <a href="signup.html" class="signup" use:link>
+          <span>회원가입</span>
+        </a>
+        <a href="/login" class="login" use:link>
+          <span>로그인</span>
+        </a>
+      {/if}
     </div>
   </div>
 </main>
@@ -77,7 +145,8 @@
     width: 95px;
   }
 
-  main .main__inner .button_part a {
+  main .main__inner .button_part a,
+  main .main__inner .button_part button {
     width: 100%;
     text-decoration: none;
     background-color: rgb(250, 179, 48);
@@ -91,6 +160,8 @@
     align-items: center;
     padding: 15px 0;
     color: #fff;
+    font-size: 16px;
+    cursor: pointer;
   }
 
   main .main__inner .button_part a span {
@@ -105,10 +176,7 @@
     text-align: center;
   }
 
-  main .main__inner.noauth {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  main .main__inner {
     height: calc(100vh - 95px);
   }
 
